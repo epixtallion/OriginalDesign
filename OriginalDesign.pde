@@ -26,3 +26,17 @@ void minutes(){
 void hours(){
   //Draws hour hand
 }
+int[] hand(int angle, int lth){
+  //Gets number that can be inputted to sine/cosine function
+  int work = 90 - (angle % 90);
+  
+  //Find opposite and adjacent for circle of 1 unit radius
+  int opp = (int) Math.round(Math.sin(work));
+  int adj = (int) Math.round(Math.cos(work));
+  
+  //Creates array for coordinates to return
+  //TODO implement some sort of algorithm to return negative or positive coordinates?
+  int[] coords = {};
+  
+  return coords;
+}
