@@ -35,7 +35,7 @@ void watch(){
 }
 void seconds(){
   //Get coordinates for second hand from hand()
-  float[] endPoint = hand(6 * second(), 70);
+  int[] endPoint = hand(6 * second(), 70);
   
   //Set color and thickness of second hand
   stroke(255, 28, 28);
@@ -46,7 +46,7 @@ void seconds(){
 }
 void minutes(){
   //Get coordinates for minute hand from hand()
-  float[] endPoint = hand(6 * minute(), 64);
+  int[] endPoint = hand(6 * minute(), 64);
   
   //Set color and thickness of minute hand
   stroke(200, 200, 200);
@@ -58,7 +58,7 @@ void minutes(){
 void hours(){
   //Get coordinates for hour hand from hand()
   int degree = round((30 * (hour()%12)) + (1/2 * minute()));
-  float[] endPoint = hand(degree, 30);
+  int[] endPoint = hand(degree, 30);
   
   //Set color and thickness of hour hand
   stroke(0, 0, 0);
@@ -67,38 +67,38 @@ void hours(){
   //Draws hour hand
   line(150, 150, endPoint[0], endPoint[1]);
 }
-float[] hand(int angle, float lth){
+int[] hand(int angle, int lth){
   //Gets number that can be inputted to sine/cosine function
   int work = (angle <= 90 || angle >= 270) ?
   90 - (angle % 90) : angle % 90;
   
   //Find opposite and adjacent for circle of 1 unit radius
-  double opp = sin(work*PI/180)*lth;
-  double adj = cos(work*PI/180)*lth;
+  int opp = round(sin(work*PI/180)*lth);
+  int adj = round(cos(work*PI/180)*lth);
   
   //Account for right angle values
   if(angle == 90) {adj = lth; opp = 0;}
   else if(work == 0) {adj = 0; opp = lth; } 
   
   //Figure out x and y coordinates
-  float x;
-  float y;
+  int x;
+  int y;
   if (angle <= 90){
-    x = 150 + parseFloat(String.valueOf(adj));
-    y = 150 - parseFloat(String.valueOf(opp));
+    x = 150 + adj;
+    y = 150 - opp;
   } else if (angle <= 180){
-    x = 150 + parseFloat(String.valueOf(adj));
-    y = 150 + parseFloat(String.valueOf(opp));
+    x = 150 + adj;
+    y = 150 + opp;
   } else if (angle <= 270){
-    x = 150 - parseFloat(String.valueOf(opp));
-    y = 150 + parseFloat(String.valueOf(adj));
+    x = 150 - opp;
+    y = 150 + adj;
   } else {
-    x = 150 - parseFloat(String.valueOf(opp));
-    y = 150 - parseFloat(String.valueOf(adj));
+    x = 150 - opp;
+    y = 150 - adj;
   }
     
   //Creates array for coordinates to return
-  float[] coords = {x, y};
+  int[] coords = {x, y};
   
   return coords;
 }
