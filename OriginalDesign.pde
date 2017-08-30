@@ -50,9 +50,14 @@ int[] hand(int angle, int lth){
   int opp = (int) Math.round(Math.sin(work));
   int adj = (int) Math.round(Math.cos(work));
   
+  //Figure out x and y coordinates
+  int x = (angle+work)/90 < 3
+    ? 150 + lth*adj : 150 - lth*adj;
+  int y = (angle+work)/90 == 1 || (angle+work)/90 == 4
+    ? 150 + lth*opp : 150 - lth*opp;
+    
   //Creates array for coordinates to return
-  //TODO implement some sort of algorithm to return negative or positive coordinates?
-  int[] coords = {};
+  int[] coords = {x, y};
   
   return coords;
 }
