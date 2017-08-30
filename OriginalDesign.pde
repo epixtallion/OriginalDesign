@@ -57,7 +57,7 @@ void minutes(){
 }
 void hours(){
   //Get coordinates for hour hand from hand()
-  int degree = round((30 * (hour()%12)) + (1/2 * minute()));
+  int degree = (30 * (hour()%12));
   int[] endPoint = hand(degree, 30);
   
   //Set color and thickness of hour hand
