@@ -9,8 +9,7 @@ void watch(){
   //Draws watch strap
   noStroke();
   fill(67,44,19);
-  rect(75, 0, 150, 300);
-  
+  rect(85, 0, 130, 300);
   
   //Draws a watch
   fill(234,218,88);
@@ -46,10 +45,26 @@ void seconds(){
   line(150, 150, endPoint[0], endPoint[1]);
 }
 void minutes(){
+  //Get coordinates for minute hand from hand()
+  float[] endPoint = hand(6 * minute(), 64);
+  
+  //Set color and thickness of minute hand
+  stroke(200, 200, 200);
+  strokeWeight(4);
+  
   //Draws minute hand
+  line(150, 150, endPoint[0], endPoint[1]);
 }
 void hours(){
+  //Get coordinates for hour hand from hand()
+  float[] endPoint = hand(15 * hour(), 30);
+  
+  //Set color and thickness of hour hand
+  stroke(0, 0, 0);
+  strokeWeight(10);
+  
   //Draws hour hand
+  line(150, 150, endPoint[0], endPoint[1]);
 }
 float[] hand(int angle, float lth){
   //Gets number that can be inputted to sine/cosine function
