@@ -53,21 +53,33 @@ void hours(){
 }
 float[] hand(int angle, float lth){
   //Gets number that can be inputted to sine/cosine function
-  int work = 90 - (angle % 90);
-  //Temporary return for 0, 90, 180, and 270 degrees
-  if (work == 90) return new float[] {0, 0};
+  int work = (angle <= 90 || angle >= 270) ?
+  90 - (angle % 90) : angle % 90;
   
   //Find opposite and adjacent for circle of 1 unit radius
-  double opp = sin(work*PI/360)*lth;
-  double adj = cos(work*PI/360)*lth;
+  double opp = sin(work*PI/180)*lth;
+  double adj = cos(work*PI/180)*lth;
+  
+  //Account for right angle values
+  if(angle == 90) {adj = lth; opp = 0;}
+  else if(work == 0) {adj = 0; opp = lth; } 
   
   //Figure out x and y coordinates
-  /*int x = angle <= 180
-    ? 150 + adj : 150 - adj;
-  int y = angle <= 90 || angle >= 270
-    ? 150 - opp : 150 + opp;*/
-  float x = 150 + parseFloat(String.valueOf(adj));
-  float y = 150 + parseFloat(String.valueOf(opp));
+  float x;
+  float y;
+  if (angle <= 90){
+    x = 150 + parseFloat(String.valueOf(adj));
+    y = 150 - parseFloat(String.valueOf(opp));
+  } else if (angle <= 180){
+    x = 150 + parseFloat(String.valueOf(adj));
+    y = 150 + parseFloat(String.valueOf(opp));
+  } else if (angle <= 270){
+    x = 150 - parseFloat(String.valueOf(opp));
+    y = 150 + parseFloat(String.valueOf(adj));
+  } else {
+    x = 150 - parseFloat(String.valueOf(opp));
+    y = 150 - parseFloat(String.valueOf(adj));
+  }
     
   //Creates array for coordinates to return
   float[] coords = {x, y};
