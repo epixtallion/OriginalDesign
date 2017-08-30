@@ -7,6 +7,7 @@ void draw(){
 }
 void watch(){
   //Draws watch strap
+  noStroke();
   fill(67,44,19);
   rect(75, 0, 150, 300);
   
@@ -34,7 +35,15 @@ void watch(){
   ellipse(150,150,8,8);
 }
 void seconds(){
+  //Get coordinates for second hand from hand()
+  float[] endPoint = hand(6 * second(), 70);
+  
+  //Set color and thickness of second hand
+  stroke(255, 28, 28);
+  strokeWeight(2);
+  
   //Draws second hand
+  line(150, 150, endPoint[0], endPoint[1]);
 }
 void minutes(){
   //Draws minute hand
@@ -42,22 +51,26 @@ void minutes(){
 void hours(){
   //Draws hour hand
 }
-int[] hand(int angle, int lth){
+float[] hand(int angle, float lth){
   //Gets number that can be inputted to sine/cosine function
   int work = 90 - (angle % 90);
+  //Temporary return for 0, 90, 180, and 270 degrees
+  if (work == 90) return new float[] {0, 0};
   
   //Find opposite and adjacent for circle of 1 unit radius
-  int opp = (int) Math.round(Math.sin(work));
-  int adj = (int) Math.round(Math.cos(work));
+  double opp = sin(work*PI/360)*lth;
+  double adj = cos(work*PI/360)*lth;
   
   //Figure out x and y coordinates
-  int x = (angle+work)/90 < 3
-    ? 150 + lth*adj : 150 - lth*adj;
-  int y = (angle+work)/90 == 1 || (angle+work)/90 == 4
-    ? 150 + lth*opp : 150 - lth*opp;
+  /*int x = angle <= 180
+    ? 150 + adj : 150 - adj;
+  int y = angle <= 90 || angle >= 270
+    ? 150 - opp : 150 + opp;*/
+  float x = 150 + parseFloat(String.valueOf(adj));
+  float y = 150 + parseFloat(String.valueOf(opp));
     
   //Creates array for coordinates to return
-  int[] coords = {x, y};
+  float[] coords = {x, y};
   
   return coords;
 }
