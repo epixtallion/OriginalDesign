@@ -2,7 +2,7 @@ void setup(){
   size(300,300);
 }
 void draw(){
-  background(135,185,167);
+  bgcolor();
   watch();
 }
 void watch(){
@@ -74,4 +74,31 @@ int[] hand(int angle, int lth){
   //Creates array for coordinates to return
   int[] coords = {x, y};
   return coords;
+}
+void bgcolor(){
+  int h = hour();
+  int m = h*60 + minute();
+  if(h <= 5 || h >= 22){
+    //Set background for night
+    background(6, 7, 17);
+
+    //TODO implement stars method
+    //stars();
+  }
+  else if (h > 5 && h < 9){
+    //Set m to working minutes from starting hour
+    m = m - 5*60;
+    //Set dynamic background for morning
+    background(6 + (83/240*m), 7 + (125/240*m), 17 + (205/240*m));
+  }
+  else if (h >= 9 && h < 16){
+    //Set background for daytime
+    background(89,132,222);
+  }
+  else if (h >= 16 && h < 22){
+    //Set m to working minutes from starting hour
+    m = m - 16*60;
+    //Set dynamic background for evening
+    background(89 - (83/240*m), 132 - (125/240*m), 222 - (205/240*m));
+  }
 }
