@@ -83,22 +83,37 @@ void bgcolor(){
     background(6, 7, 17);
 
     //TODO implement stars method
-    //stars();
+    //stars(1);
   }
   else if (h > 5 && h < 9){
-    //Set m to working minutes from starting hour
-    m = m - 5*60;
-    //Set dynamic background for morning
-    background(6 + (83/240*m), 7 + (125/240*m), 17 + (205/240*m));
+    if(h < 6){
+      //Set m to working minutes from starting hour
+      m = m - 5*60;
+      //Sunrise
+      background(6 + (83/60*m), 7 + (125/60*m), 17 + (205/60*m));
+    } else {
+      //Set m to working minutes from starting hour
+      m = m - 6*60;
+      //Set dynamic background for morning
+      background(89 + (114-89)/240*m, 132 + (189-125)/240*m, 222 + (255-222)/240*m;
+    }
   }
   else if (h >= 9 && h < 16){
     //Set background for daytime
-    background(89,132,222);
+    background(114, 189, 255);
   }
-  else if (h >= 16 && h < 22){
-    //Set m to working minutes from starting hour
-    m = m - 16*60;
-    //Set dynamic background for evening
-    background(89 - (83/240*m), 132 - (125/240*m), 222 - (205/240*m));
+  else if (h >= 16 && h < 21){
+    if (h < 18){
+      //Set m to working minutes from starting hour
+      m = m - 16*60;
+      //Set dynamic background for evening
+      background(114 - (114-89)/120*m, 189 - (189-125)/120*m, 255 - (255-222)/120*m;
+    } else {
+      //Set m to working minutes from starting hour
+      m = m - 18*60;
+      background(89 - (89-6)/180*m, 132 - (132-7)/180*m, 222 - (222-17)/180*m)
+      //stars(100/180*m);
+    }
   }
 }
+//void stars(double opacity){}
