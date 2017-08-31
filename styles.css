@@ -12,8 +12,9 @@ body {
     margin-right: auto
 }
 
-header {
-  font-style: italic, bold;
+h1 {
+  font-style: italic;
+  font-weight: bold;
 }
 
 footer {
